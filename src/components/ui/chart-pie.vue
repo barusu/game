@@ -115,24 +115,24 @@
           }
           // 切换图表类型
           switch(this.option.chartType) {
-          case 'pie': break;
-          case 'roseRadius':
-            this.op.series[0].roseType = 'radius';
-            break;
-          case 'roseArea':
-            this.op.series[0].roseType = 'area';
-            break;
-          case 'ringRoseRadius':
-            this.op.series[0].roseType = 'radius';
-            this.op.series[0].radius = ['20%', '70%'];
-            break;
-          case 'ringRoseArea':
-            this.op.series[0].roseType = 'area';
-            this.op.series[0].radius = ['20%', '70%'];
-            break;
-          default:
-            this.op.series[0].radius = ['50%', '70%'];
-            this.op.series[0].label.emphasis.textStyle = {fontSize: tfz};
+            case 'pie': break;
+            case 'roseRadius':
+              this.op.series[0].roseType = 'radius';
+              break;
+            case 'roseArea':
+              this.op.series[0].roseType = 'area';
+              break;
+            case 'ringRoseRadius':
+              this.op.series[0].roseType = 'radius';
+              this.op.series[0].radius = ['20%', '70%'];
+              break;
+            case 'ringRoseArea':
+              this.op.series[0].roseType = 'area';
+              this.op.series[0].radius = ['20%', '70%'];
+              break;
+            default:
+              this.op.series[0].radius = ['50%', '70%'];
+              this.op.series[0].label.emphasis.textStyle = {fontSize: tfz};
           }
           this.chart.setOption(this.op, true);
           this.$nextTick(() => {

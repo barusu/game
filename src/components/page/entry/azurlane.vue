@@ -232,44 +232,44 @@
     watch: {
       'ship.type': function(value) {
         switch(value) {
-        case 'DD':
-          this.ship.equip1 = 'DDG';
-          this.ship.equip2 = 'TD';
-          break;
-        case 'CL':
-          this.ship.equip1 = 'CLG';
-          this.ship.equip2 = 'TD';
-          break;
-        case 'CA':
-          this.ship.equip1 = 'CAG';
-          this.ship.equip2 = 'TD';
-          break;
-        case 'BB':
-          this.ship.equip1 = 'BBG';
-          this.ship.equip2 = 'CLG';
-          break;
-        case 'BC':
-          this.ship.equip1 = 'BBG';
-          this.ship.equip2 = 'DDG';
-          break;
-        case 'CVL':
-          this.ship.equip1 = '';
-          this.ship.equip2 = '';
-          break;
-        case 'CV':
-          this.ship.equip1 = 'FP';
-          this.ship.equip2 = 'BP';
-          this.ship.equip3 = 'TP';
-          break;
-        case 'BBV':
-          this.ship.equip1 = 'BBG';
-          this.ship.equip2 = 'WS';
-          break;
-        case 'AR':
-          this.ship.equip1 = 'EQ';
-          this.ship.equip2 = 'ADA';
-          break;
-        default:
+          case 'DD':
+            this.ship.equip1 = 'DDG';
+            this.ship.equip2 = 'TD';
+            break;
+          case 'CL':
+            this.ship.equip1 = 'CLG';
+            this.ship.equip2 = 'TD';
+            break;
+          case 'CA':
+            this.ship.equip1 = 'CAG';
+            this.ship.equip2 = 'TD';
+            break;
+          case 'BB':
+            this.ship.equip1 = 'BBG';
+            this.ship.equip2 = 'CLG';
+            break;
+          case 'BC':
+            this.ship.equip1 = 'BBG';
+            this.ship.equip2 = 'DDG';
+            break;
+          case 'CVL':
+            this.ship.equip1 = '';
+            this.ship.equip2 = '';
+            break;
+          case 'CV':
+            this.ship.equip1 = 'FP';
+            this.ship.equip2 = 'BP';
+            this.ship.equip3 = 'TP';
+            break;
+          case 'BBV':
+            this.ship.equip1 = 'BBG';
+            this.ship.equip2 = 'WS';
+            break;
+          case 'AR':
+            this.ship.equip1 = 'EQ';
+            this.ship.equip2 = 'ADA';
+            break;
+          default:
         }
         this.updateOil();
       },

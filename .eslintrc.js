@@ -17,7 +17,7 @@ module.exports = {
   'rules': {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    "indent": [2, 2],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     // "quotes": [2, "single"],
     "no-multiple-empty-lines": [2, {"max": 1}],
     "no-spaced-func": 2,//函数调用时，函数名和括号之间不能有空格

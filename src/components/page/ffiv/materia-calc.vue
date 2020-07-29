@@ -1,11 +1,16 @@
 <template>
   <div class="materia-calc">
     <div class="main">
-      <p><o-button type="info" @click="save">保存</o-button> <span v-text="Quality1"></span> / 2421 - <span v-text="Quality2"></span> / 2345 - <span v-text="Quality3"></span> / 836 </p>
+      <p>
+        <o-button type="info" @click="save">保存</o-button>
+        <span :class="{'info': Quality1 >= 2421}" v-text="Quality1"></span> / 2421 - 
+        <span :class="{'info': Quality2 >= 2345}" v-text="Quality2"></span> / 2345 - 
+        <span :class="{'info': Quality3 >= 836}" v-text="Quality3"></span> / 836 
+      </p>
       <div class="line" v-for="i in temp" :key="i.data">
         <span class="name" v-text="i.name"></span>
         <o-select v-model="data[i.data][index]" :skin="i.materia[index] ? 'base error' : 'base'" :data="mdata[i.materia[index]]" placeholder="" v-for="(m, index) in i.materia" :key="index"></o-select>
-        <span> <span v-text="i.qualityEx1"></span> - <span v-text="i.qualityEx2"></span> - <span v-text="i.qualityEx3"></span> </span>
+        <span v-html="format(i)"></span>
       </div>
     </div>
     <span @click="log">test</span>
@@ -168,21 +173,8 @@ export default {
   data() {
     return {
       temp: c460,
-      data: [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
-      ],
+      // eslint-disable-next-line
+      data: [[82,201,120,120,120],[82,201,121,120,120],[82,200,201,121,121],[200,201,200,120,120],[200,200,201,120,41],[200,151,72,30,0],[200,200,41,12,0],[82,201,201,40,0],[200,201,72,72,30],[200,201,72,72,30],[200,201,72,72,31],[200,201,72,30,31],[200,201,72,30,31]],
       typeNum: 3,
       type: 'c'
     };
@@ -190,6 +182,20 @@ export default {
   methods: {
     log() {
       console.log(this.data);
+    },
+    format(i) {
+      var q1 = 0, q2 = 0, q3 = 0;
+      this.data[i.data].forEach(d => {
+        var t = d / 10 >> 0;
+        switch (d % 10) {
+          case 0: q1 += t; break;
+          case 1: q2 += t; break;
+          case 2: q3 += t; break;
+          default:
+            break;
+        }
+      });
+      return `<span class="${q1 > i.qualityEx1? 'error' : 'info'}">${q1}/${i.qualityEx1}</span>-<span class="${q2 > i.qualityEx2? 'error' : 'info'}">${q2}/${i.qualityEx2}</span>-<span class="${q3 > i.qualityEx3? 'error' : 'info'}">${q3}/${i.qualityEx3}</span>`;
     },
     save() {
       localStorage.materiac460 = JSON.stringify(this.data);
@@ -201,9 +207,17 @@ export default {
       for(var i = 0; i < this.typeNum; i++) {
         s.push({value: Value[this.type][i][8] * 10 + i, label: `${type[this.type][i]}捌型 (${Value[this.type][i][0]}${Value[this.type][i][8]})`});
         s.push({value: Value[this.type][i][6] * 10 + i, label: `${type[this.type][i]}陆型 (${Value[this.type][i][0]}${Value[this.type][i][6]})`});
+        s.push({value: Value[this.type][i][5] * 10 + i, label: `${type[this.type][i]}伍型 (${Value[this.type][i][0]}${Value[this.type][i][5]})`});
+        s.push({value: Value[this.type][i][4] * 10 + i, label: `${type[this.type][i]}肆型 (${Value[this.type][i][0]}${Value[this.type][i][4]})`});
+        s.push({value: Value[this.type][i][3] * 10 + i, label: `${type[this.type][i]}叁型 (${Value[this.type][i][0]}${Value[this.type][i][3]})`});
+        s.push({value: Value[this.type][i][2] * 10 + i, label: `${type[this.type][i]}贰型 (${Value[this.type][i][0]}${Value[this.type][i][2]})`});
+        s.push({value: Value[this.type][i][1] * 10 + i, label: `${type[this.type][i]}壹型 (${Value[this.type][i][0]}${Value[this.type][i][1]})`});
         d.push({value: Value[this.type][i][7] * 10 + i, label: `${type[this.type][i]}柒型 (${Value[this.type][i][0]}${Value[this.type][i][7]})`});
         d.push({value: Value[this.type][i][5] * 10 + i, label: `${type[this.type][i]}伍型 (${Value[this.type][i][0]}${Value[this.type][i][5]})`});
         d.push({value: Value[this.type][i][4] * 10 + i, label: `${type[this.type][i]}肆型 (${Value[this.type][i][0]}${Value[this.type][i][4]})`});
+        d.push({value: Value[this.type][i][3] * 10 + i, label: `${type[this.type][i]}叁型 (${Value[this.type][i][0]}${Value[this.type][i][3]})`});
+        d.push({value: Value[this.type][i][2] * 10 + i, label: `${type[this.type][i]}贰型 (${Value[this.type][i][0]}${Value[this.type][i][2]})`});
+        d.push({value: Value[this.type][i][1] * 10 + i, label: `${type[this.type][i]}壹型 (${Value[this.type][i][0]}${Value[this.type][i][1]})`});
       }
       tem.push(s, s, d, d, d);
       return tem;
@@ -269,10 +283,19 @@ export default {
   p {
     text-align: left;
     margin-bottom: .5em;
+    .info {
+      color: #34c849;
+    }
   }
   .line {
     text-align: left;
     margin-bottom: 5px;
+    .info {
+      color: #409eff;
+    }
+    .error {
+      color: #fc605d;
+    }
   }
   .name {
     display: inline-block;
