@@ -6,7 +6,7 @@
     color: #444;
     z-index: 9;
     height: .6rem;
-    padding: 0 5%;
+    padding: 0 0 0 5%;
     font-size: .2rem;
     background: #fff;
     transition: box-shadow .5s;
@@ -33,8 +33,29 @@
         transform-style: preserve-3d;
       }
     }
+    .time {
+      display: block;
+      float: right;
+      font-size: 12px;
+      line-height: 16px;
+      margin: 5px 1em;
+      .lt::before { content: "本"; }
+      .et::before { content: "艾"; }
+      > span::before {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 3px;
+        margin-left: 5px;
+        line-height: 16px;
+        text-align: center;
+        border-radius: 2px;
+        background: #aaa;
+        color: #fff;
+      }
+    }
     .title {
-      display: inline-block;
+      display: block;
       height: 100%;
       font-size: 20px;
       padding: 0 .5em;
@@ -67,6 +88,10 @@
     <div class="logo" @click="$router.push('/')">
       <img src="../assets/ab_story_bg.png" alt="">
     </div>
+    <span class="time">
+      <span class="lt" v-text="lt">00:00</span>
+      <span class="et" v-text="et">00:00</span>
+    </span>
     <span class="title"></span>
     <nav>
       <router-link :to="{name: 'ffiv'}">FFIV</router-link>
@@ -74,11 +99,32 @@
       <router-link :to="{name: 'canvas'}">Canvas</router-link>
       <router-link :to="{name: 'code'}">Code</router-link>
       <router-link :to="{name: 'entry'}">Entry</router-link>
-      <router-link :to="{name: 'about'}">About</router-link>
     </nav>
   </header>
 </template>
 
 <script>
-  export default {}
+  function add0(n) {
+    return n < 10 ? '0' + n : n;
+  }
+
+  export default {
+    data() {
+      return {
+        timeout: null,
+        lt: '00:00',
+        et: '00:00'
+      };
+    },
+    mounted() {
+      this.timeout = setInterval(() => {
+        var n = new Date();
+        this.lt = `${add0(n.getHours())}:${add0(n.getMinutes())}`;
+        this.et = `${add0(n % 4200000 / 175000 >> 0)}:${add0(n % 175000 / 175000 * 60 >> 0)}`;
+      }, 500);
+    },
+    beforeDestroy() {
+      clearInterval(this.timeout);
+    }
+  }
 </script>

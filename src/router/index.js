@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import FFIV from '@/components/page/ffiv/index';
 import MateriaCalc from '@/components/page/ffiv/materia-calc';
+import GatheringTimer from '@/components/page/ffiv/gatheringtimer';
 
 import Login from '@/components/login';
 import Index from '@/components/page/index';
@@ -100,7 +101,8 @@ export default new Router({
     ]},
     {path: '/ui', name: 'ui', component: UI},
     {path: '/ffiv', name: 'ffiv', component: FFIV, children: [
-      {path: 'materia-calc', name: 'materia', component: MateriaCalc}
+      {path: 'materia-calc', name: 'materia', component: MateriaCalc},
+      {path: 'GatheringTimer', name: 'GatheringTimer', component: GatheringTimer}
     ]}
   ]
 });

@@ -1,6 +1,9 @@
 <template>
   <main class="ffiv">
-    <router-link :to="{name: 'materia'}">TEST</router-link>
+    <div class="guide">
+      <router-link :to="{name: 'materia'}">采集460</router-link>
+      <router-link :to="{name: 'GatheringTimer'}">采集</router-link>
+    </div>
     <router-view/>
   </main>
 </template>
