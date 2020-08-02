@@ -9,7 +9,10 @@
       </p>
       <div class="line" v-for="i in temp" :key="i.data">
         <span class="name" v-text="i.name"></span>
-        <o-select v-model="data[i.data][index]" :skin="i.materia[index] ? 'base error' : 'base'" :data="mdata[i.materia[index]]" placeholder="" v-for="(m, index) in i.materia" :key="index"></o-select>
+        <template v-for="(m, index) in i.materia">
+          <o-select v-model="data[i.data][index]" :skin="i.materia[index] ? 'base error' : 'base'" :data="mdata[i.materia[index]]" placeholder="" :key="index"></o-select>
+          <o-checkbox :key="'ck' + index" v-model="datas[i.data][index]"></o-checkbox>
+        </template>
         <span v-html="format(i)"></span>
       </div>
     </div>
@@ -175,6 +178,7 @@ export default {
       temp: c460,
       // eslint-disable-next-line
       data: [[82,201,120,120,120],[82,201,121,120,120],[82,200,201,121,121],[200,201,200,120,120],[200,200,201,120,41],[200,151,72,30,0],[200,200,41,12,0],[82,201,201,40,0],[200,201,72,72,30],[200,201,72,72,30],[200,201,72,72,31],[200,201,72,30,31],[200,201,72,30,31]],
+      datas: [[false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false, false]],
       typeNum: 3,
       type: 'c'
     };
@@ -199,6 +203,7 @@ export default {
     },
     save() {
       localStorage.materiac460 = JSON.stringify(this.data);
+      localStorage.materiacs460 = JSON.stringify(this.datas);
     }
   },
   computed: {
@@ -264,6 +269,9 @@ export default {
     if(localStorage.materiac460) {
       this.data = JSON.parse(localStorage.materiac460);
     }
+    if(localStorage.materiacs460) {
+      this.datas = JSON.parse(localStorage.materiacs460);
+    }
   }
 }
 </script>
@@ -274,8 +282,7 @@ export default {
   width: 90%;
   margin: 0 auto;
   .o-select {
-    width: 10em;
-    margin-right: .5em;
+    width: 12em;
     &.error .select {
       border-color: #fc605d;
     }
@@ -301,6 +308,12 @@ export default {
     display: inline-block;
     width: 2em;
     text-align: center;
+  }
+  .o-checkbox {
+    margin-right: .5em;
+  }
+  .o-checkbox .text {
+    display: none;
   }
 }
 </style>
